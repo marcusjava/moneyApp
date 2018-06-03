@@ -4,7 +4,7 @@ import { reset as resetForm, initialize } from "redux-form";
 import { showTabs, selectTab } from "../common/tab/tabActions";
 
 const BASE_URL = "http://localhost:3003/api/ciclopagamentos";
-const INITIAL_VALUES = { creditos: [{}] };
+const INITIAL_VALUES = { creditos: [{}], debitos: [{}] };
 
 export function getList() {
   const response = axios.get(`${BASE_URL}`);

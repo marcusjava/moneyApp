@@ -7,8 +7,8 @@ const creditSchema = new mongoose.Schema({
 });
 
 const debtSchema = new mongoose.Schema({
-  nome: { type: String, required: true },
-  value: { type: Number, min: 0, required: true },
+  name: { type: String, required: false },
+  value: { type: Number, min: 0, required: false },
   status: {
     type: String,
     required: false,

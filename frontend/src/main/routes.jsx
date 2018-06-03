@@ -8,8 +8,10 @@ import CicloPagamento from "../cicloPagamento/cicloPagamento";
 
 export default props => (
   <Router history={hashHistory}>
-    <Route path="/" component={Dashboard2} />
-    <Route path="/ciclopagamentos" component={CicloPagamento} />
+    <Route path="/" component={App}>
+      <IndexRoute component={Dashboard} />
+      <Route path="/ciclopagamentos" component={CicloPagamento} />
+    </Route>
     <Redirect from="*" to="/" />
   </Router>
 );

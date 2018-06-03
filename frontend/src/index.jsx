@@ -19,7 +19,7 @@ const store = applyMiddleware(multi, thunk, promise)(createStore)(
 );
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Routes />
   </Provider>,
   document.getElementById("app")
 );

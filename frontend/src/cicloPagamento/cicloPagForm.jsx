@@ -6,8 +6,9 @@ import { connect } from "react-redux";
 import { init } from "./cicloPagActions";
 import Grid from "../common/layout/grid";
 import Input from "../common/form/labelAndInput";
+import Sumario from "./sumario";
 
-import ListaCredito from "./listaCredito";
+import ItemList from "./itemList";
 
 import { reduxForm, Field, formValueSelector } from "redux-form";
 
@@ -16,8 +17,20 @@ class CicloPagForm extends Component {
     super(props);
   }
 
+  calcularSumario() {
+    const sum = (t, v) => t + v;
+    return {
+      somaCreditos: this.props.creditos
+        .map(credito => +credito.value || 0)
+        .reduce(sum),
+      somaDebitos: this.props.debitos
+        .map(debito => +debito.value || 0)
+        .reduce(sum)
+    };
+  }
   render() {
-    const { handleSubmit, readOnly, creditos } = this.props;
+    const { handleSubmit, readOnly, creditos, debitos } = this.props;
+    const { somaCreditos, somaDebitos } = this.calcularSumario();
     return (
       <div>
         <form role="form" onSubmit={handleSubmit}>
@@ -51,7 +64,22 @@ class CicloPagForm extends Component {
               cols="12 4"
               placeholder="Informe o ano"
             />
-            <ListaCredito cols="12 6" readOnly={readOnly} creditos={creditos} />
+            <Sumario creditos={somaCreditos} debitos={somaDebitos} />
+            <ItemList
+              cols="12 6"
+              readOnly={readOnly}
+              list={creditos}
+              type="creditos"
+              title="Credito"
+            />
+            <ItemList
+              cols="12 6"
+              readOnly={readOnly}
+              list={debitos}
+              showStatus
+              type="debitos"
+              title="Debito"
+            />
           </div>
           <div className="box-footer">
             <button className={`btn btn-${this.props.btnClass}`} type="submit">
@@ -78,7 +106,10 @@ CicloPagForm = reduxForm({ form: "cicloPagForm", destroyOnUnmount: false })(
 const selector = formValueSelector("cicloPagForm");
 
 // acessando o state do redux-form
-const mapStateToProps = state => ({ creditos: selector(state, "creditos") });
+const mapStateToProps = state => ({
+  creditos: selector(state, "creditos"),
+  debitos: selector(state, "debitos")
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({ init }, dispatch);
 
