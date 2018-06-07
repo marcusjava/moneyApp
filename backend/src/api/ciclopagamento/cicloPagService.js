@@ -4,6 +4,7 @@ const errorHandler = require("../common/errorHandler");
 CicloPagamento.methods(["get", "post", "put", "delete"]);
 CicloPagamento.updateOptions({ new: true, runValidators: true });
 CicloPagamento.after("post", errorHandler).after("put", errorHandler);
+
 // contador
 CicloPagamento.route("count", (req, res, next) => {
   CicloPagamento.count((error, value) => {

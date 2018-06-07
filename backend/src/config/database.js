@@ -7,7 +7,14 @@ mongoose.Error.messages.Number.min =
 mongoose.Error.messages.Number.max =
   "O valor informado '{VALUE}' é maior que o limite maximo de '{MAX}'";
 
-// module.exports = mongoose.connect("mongodb://localhost/moneyapp");
+//module.exports = mongoose.connect("mongodb://localhost/moneyapp");
+// module.exports = mongoose.connect(
+//   "mongodb://marcus:paletizado@ds135540.mlab.com:35540/moneyapp"
+// );
+const url = process.env.MONGOLAB_URI
+  ? process.env.MONGOLAB_URI
+  : "mongodb://marcus:paletizado@ds135540.mlab.com:35540/moneyapp";
 module.exports = mongoose.connect(
-  "mongodb://marcus:paletizado@ds135540.mlab.com:35540/moneyapp"
+  url,
+  { useMongoClient: true }
 );
