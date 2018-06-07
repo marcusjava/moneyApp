@@ -1,4 +1,5 @@
 import React from "react";
+import NavBar from "./navBar";
 
 const header = props => (
   <header className="main-header">
@@ -13,6 +14,7 @@ const header = props => (
     </a>
     <nav className="navbar navbar-static-top">
       <a href="/#/" className="sidebar-toggle" data-toggle="offcanvas" />
+      <NavBar />
     </nav>
   </header>
 );
